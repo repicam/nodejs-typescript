@@ -11,3 +11,14 @@ export const getEntriesWithoutSensitiveInfo = (): NonSensitiveInfoDiaryEntry[] =
     return { id, date, weather, visibility }
   })
 }
+
+export const findById = (id: number): NonSensitiveInfoDiaryEntry | undefined => {
+  const diary = diaries.find(d => d.id === id)
+
+  if (diary != null) {
+    const { comment, ...diaryData } = diary
+    return diaryData
+  }
+
+  return undefined
+}
