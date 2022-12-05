@@ -1,5 +1,5 @@
 import diaryData from '../db/diaries.json'
-import { DiaryEntry, NonSensitiveInfoDiaryEntry } from '../types'
+import { DiaryEntry, NewDiaryEntry, NonSensitiveInfoDiaryEntry } from '../types'
 
 const diaries: DiaryEntry[] = diaryData as DiaryEntry[]
 
@@ -21,4 +21,14 @@ export const findById = (id: number): NonSensitiveInfoDiaryEntry | undefined => 
   }
 
   return undefined
+}
+
+export const addDiary = (newDiaryEntry: NewDiaryEntry): DiaryEntry => {
+  const newDiary = {
+    id: Math.max(...diaries.map(d => d.id)) + 1,
+    ...newDiaryEntry
+  }
+
+  diaries.push(newDiary)
+  return newDiary
 }
